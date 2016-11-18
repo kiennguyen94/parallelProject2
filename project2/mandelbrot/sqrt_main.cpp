@@ -155,7 +155,20 @@ double mysqrt(double n)
 }
 int main(int argc, char** argv) {
   // Prepare data
-  long int N = 1000000000000;
+  // long int N = 1000000000000;
+	int N = 0;
+	if (argc != 2){
+		cout<<"Please input number of elements to run\n";
+		return 0;
+	}
+	if (atoi(argv[1])){
+		N = atoi(argv[1]);
+	}
+	else{
+		cout<<"please only input a number \n";
+		return 0;
+	}
+
   srand(10);
   float *x = new float[N];
 
@@ -174,7 +187,7 @@ int main(int argc, char** argv) {
   sqrt_ispc(N, x, out);
   double dt = get_elapsed_mcycles();
   // minISPC = std::min(minISPC, dt);
-  cout<<"ISPC time with "<<N<<" elements is "<<dt<<" cycles\n";
+  cout<<"ISPC time with "<<N<<" elements is "<<dt<<" million cycles\n";
 
   // Resetting the buffer
   for (int i = 0; i < N; i++){
@@ -187,7 +200,7 @@ int main(int argc, char** argv) {
     out[i] = mysqrt(x[i]);
   }
   dt = get_elapsed_mcycles();
-  cout<<"Sequential time with "<<N<<" elements is "<<dt<< " cylcles\n";
+  cout<<"Sequential time with "<<N<<" elements is "<<dt<< " million cylcles\n";
   // // For debugging
   // for (int i = 0; i < N; i++){
   //   cout<<x[i]<<' '<<out[i]<<endl;
