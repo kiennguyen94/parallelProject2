@@ -157,12 +157,14 @@ int main(int argc, char** argv) {
   // Prepare data
   // long int N = 1000000000000;
 	int N = 0;
-	if (argc != 2){
-		cout<<"Please input number of elements to run\n";
+  int num_task = 1;
+	if (argc != 3){
+		cout<<"Usage ./squareroot [number of elements] [number of tasks] \n";
 		return 0;
 	}
-	if (atoi(argv[1])){
+	if (atoi(argv[1]) && atoi(argv[2])){
 		N = atoi(argv[1]);
+    num_task = atoi(argv[2]);
 	}
 	else{
 		cout<<"please only input a number \n";
@@ -201,10 +203,25 @@ int main(int argc, char** argv) {
   }
   dt = get_elapsed_mcycles();
   cout<<"Sequential time with "<<N<<" elements is "<<dt<< " million cylcles\n";
+
+
+  // Resetting the buffer
+  for (int i = 0; i < N; i++){
+    out[i] = 0.0;
+  }
+
+  // Timing for tasked square root
+  reset_and_start_timer();
+  sqrt_ispc_task(N, x, out, num_task);
+  dt = get_elapsed_mcycles();
+  cout<<"ISPC with taks time with "<<N<<" elements is "<<dt<<" million cycles\n";
+
+
   // // For debugging
-  // for (int i = 0; i < N; i++){
+  // for (int i = N-10; i < N; i++){
   //   cout<<x[i]<<' '<<out[i]<<endl;
   // }
+
   delete[] x;
   delete[] out;
   return 0;
