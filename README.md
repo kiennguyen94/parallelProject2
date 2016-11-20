@@ -5,4 +5,4 @@ cd project2/mandelbrot/
 
 make
 
-./mandelbrot [number of element]
+./squareroot [number of element]
