@@ -7,4 +7,4 @@ make
 
 ./squareroot [number of element] [number of task]
 
-#[number of task] default to 1
+[number of task] default to 1
