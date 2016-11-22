@@ -66,7 +66,7 @@ OBJS=$(CPP_OBJS) $(CC_OBJS) $(TASK_OBJ) $(ISPC_OBJS)
 
 default: $(EXAMPLE)
 
-all: $(EXAMPLE) $(EXAMPLE)-sse4 $(EXAMPLE)-generic16 $(EXAMPLE)-scalar
+all: $(EXAMPLE) $(EXAMPLE)-sse4 $(EXAMPLE)-generic16 $(EXAMPLE)-scalar $(EXAMPLE)-avx2-i32x16
 
 .PHONY: dirs clean
 
@@ -75,8 +75,8 @@ dirs:
 
 objs/%.cpp objs/%.o objs/%.h: dirs
 
-clean:
-	/bin/rm -rf objs *~ $(EXAMPLE) $(EXAMPLE)-sse4 $(EXAMPLE)-generic16 ref test
+#clean:
+#	/bin/rm -rf objs *~ $(EXAMPLE) $(EXAMPLE)-sse4 $(EXAMPLE)-generic16 ref test
 
 $(EXAMPLE): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
