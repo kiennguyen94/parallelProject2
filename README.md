@@ -1,7 +1,7 @@
 # parallelProject2
 To compile
 
-cd project2/mandelbrot/
+cd project2/sqrt/
 
 make
 
